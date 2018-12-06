@@ -117,7 +117,7 @@ def create_slide_only_text():
 			db.session.add(slideObj)
 			db.session.commit()
 			flash("Slide Created")
-		except Exception, e:
+		except Exception as e:
 			exc = str(e)
 			flash(exc)
 		return redirect(url_for('dashboard'))
