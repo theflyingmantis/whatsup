@@ -1,6 +1,9 @@
 from flask import Flask,render_template,request, flash, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+import requests
+from bs4 import BeautifulSoup
+import random
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -10,6 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+background_color_scheme = ["#388BF2", "#E52A34", "#FBAF18", "#FC8338"]
 
 
 class Slide(db.Model):
@@ -140,6 +144,34 @@ def create_slide_only_image():
 		return redirect(url_for('dashboard'))
 	return render_template('create_slide_only_image.html')
 
+def moveAllActiveToInactive():
+	slides = Slide.query.filter_by(is_deleted=False, is_active=True).all()
+	for slide in slides:
+		slide.is_active = False
+		db.session.commit()
+
+
+@app.route('/display_news/<category>', methods=['GET', 'POST'])
+def display_news(category):
+	news = getNews(category)
+	moveAllActiveToInactive()
+	for nws in news["data"]:
+		text = nws["title"]
+		title = nws["title"]
+		image_url = nws["imageUrl"]
+		time = 4000
+		background_color = background_color_scheme[random.randint(0,3)]
+		slideObj = Slide(background_color = background_color, time=time, type="text-and-image", title=title, text=text, image_url=image_url, is_active=True)
+		try:
+			db.session.add(slideObj)
+			db.session.commit()
+		except Exception as e:
+			exc = str(e)
+			flash(exc)
+	flash("Slide Created")
+	return redirect(url_for('dashboard'))
+
+
 @app.route('/create_slide_text_over_image',methods=['GET', 'POST'])
 def create_slide_text_over_image():
 	if request.method == "POST":
@@ -177,6 +209,85 @@ def create_slide_text_and_image():
 			flash(exc)
 		return redirect(url_for('dashboard'))
 	return render_template('create_slide_text_and_image.html')
+
+def getNews(category):
+    newsDictionary = {
+        'success': True,
+        'category': category,
+        'data': []
+    }
+
+    try:
+        htmlBody = requests.get('https://www.inshorts.com/en/read/' + category)
+    except requests.exceptions.RequestException as e:
+        newsDictionary['success'] = False
+        newsDictionary['errorMessage'] = str(e.message)
+        return newsDictionary
+
+    soup = BeautifulSoup(htmlBody.text, 'lxml')
+    newsCards = soup.find_all(class_='news-card')
+    if not newsCards:
+        newsDictionary['success'] = False
+        newsDictionary['errorMessage'] = 'Invalid Category'
+        return newsDictionary
+
+    for card in newsCards:
+        try:
+            title = card.find(class_='news-card-title').find('a').text
+        except AttributeError:
+            title = None
+
+        try:
+            imageUrl = card.find(
+                class_='news-card-image')['style'].split("'")[1]
+        except AttributeError:
+            imageUrl = None
+
+        try:
+            url = ('https://www.inshorts.com' + card.find(class_='news-card-title')
+                   .find('a').get('href'))
+        except AttributeError:
+            url = None
+
+        try:
+            content = card.find(class_='news-card-content').find('div').text
+        except AttributeError:
+            content = None
+
+        try:
+            author = card.find(class_='author').text
+        except AttributeError:
+            author = None
+
+        try:
+            date = card.find(clas='date').text
+        except AttributeError:
+            date = None
+
+        try:
+            time = card.find(class_='time').text
+        except AttributeError:
+            time = None
+
+        try:
+            readMoreUrl = card.find(class_='read-more').find('a').get('href')
+        except AttributeError:
+            readMoreUrl = None
+
+        newsObject = {
+            'title': title,
+            'imageUrl': imageUrl,
+            'url': url,
+            'content': content,
+            'author': author,
+            'date': date,
+            'time': time,
+            'readMoreUrl': readMoreUrl
+        }
+
+        newsDictionary['data'].append(newsObject)
+
+    return newsDictionary
 
 
 if __name__ == '__main__':
