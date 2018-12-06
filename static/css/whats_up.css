@@ -40,13 +40,12 @@
 }
 
 .text-and-image img{
-    position: absolute;
     height: auto;
     max-height: 30%;
     width: 50%;
     right: 0;
     float: right;
     object-fit: contain;
-    margin: 50px 50px 50px 50px;
+    margin: 20px 50px 20px 50px;
     display: inline-block;
 }
