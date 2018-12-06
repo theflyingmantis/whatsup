@@ -20,11 +20,12 @@ class Slide(db.Model):
 	is_active = db.Column(db.Boolean, default=False)
 	is_deleted = db.Column(db.Boolean, default=False)
 	time = db.Column(db.Integer)
+	title = db.Column(db.String(100))
 
 	# def __repr__(self):
 	# 	return '<slide %r %r %r>' % self.id, self.text, self.is_activ
 
-def slideToJson(id, type, text, image_url, background_color, background_image_url, is_active, is_deleted, time):
+def slideToJson(id, type, text, image_url, background_color, background_image_url, is_active, is_deleted, time, title):
 	return {
 		"id": id,
 		"type": type,
@@ -34,7 +35,8 @@ def slideToJson(id, type, text, image_url, background_color, background_image_ur
 		"background_color": background_color,
 		"is_active": is_active,
 		"is_deleted": is_deleted,
-		"time" : time
+		"time" : time,
+		"title": title
 	}
 
 @app.route('/', methods=['GET'])
@@ -49,7 +51,7 @@ def dashboard():
 def checkforchange():
 	key = getActiveSlideIdConcatenated()
 	clientKey = request.args['key']
-	slides = [slideToJson(slide.id, slide.type, slide.text, slide.image_url, slide.background_color, slide.background_image_url, slide.is_active, slide.is_deleted, slide.time) for slide in Slide.query.filter_by(is_deleted=False, is_active=True).all()]
+	slides = [slideToJson(slide.id, slide.type, slide.text, slide.image_url, slide.background_color, slide.background_image_url, slide.is_active, slide.is_deleted, slide.time, slide.title) for slide in Slide.query.filter_by(is_deleted=False, is_active=True).all()]
 
 	obj = {
 		"isChanged": clientKey != key,
@@ -106,7 +108,8 @@ def create_slide_only_text():
 		background_color = request.values.get('background_color')
 		text = request.values.get('text')
 		time = request.values.get('time')
-		slideObj = Slide(text=text, background_color=background_color, time=time, type="just-text")
+		title = request.values.get('title')
+		slideObj = Slide(text=text, background_color=background_color, time=time, type="just-text", title=title)
 		try:
 			db.session.add(slideObj)
 			db.session.commit()
@@ -119,14 +122,57 @@ def create_slide_only_text():
 
 @app.route('/create_slide_only_image',methods=['GET', 'POST'])
 def create_slide_only_image():
+	if request.method == "POST":
+		background_image_url = request.values.get('url')
+		time = request.values.get('time')
+		title = request.values.get('title')
+		slideObj = Slide(background_image_url=background_image_url, time=time, type="just-text", title=title)
+		try:
+			db.session.add(slideObj)
+			db.session.commit()
+			flash("Slide Created")
+		except Exception, e:
+			exc = str(e)
+			flash(exc)
+		return redirect(url_for('dashboard'))
 	return render_template('create_slide_only_image.html')
 
 @app.route('/create_slide_text_over_image',methods=['GET', 'POST'])
 def create_slide_text_over_image():
+	if request.method == "POST":
+		background_image_url = request.values.get('url')
+		time = request.values.get('time')
+		title = request.values.get('title')
+		text = request.values.get('text')
+		slideObj = Slide(background_image_url=background_image_url, time=time, type="just-text", title=title, text=text)
+		try:
+			db.session.add(slideObj)
+			db.session.commit()
+			flash("Slide Created")
+		except Exception, e:
+			exc = str(e)
+			flash(exc)
+		return redirect(url_for('dashboard'))
 	return render_template('create_slide_text_over_image.html')
 
 @app.route('/create_slide_text_and_image',methods=['GET', 'POST'])
 def create_slide_text_and_image():
+	if request.method == "POST":
+		background_image_url = request.values.get('url')
+		time = request.values.get('time')
+		title = request.values.get('title')
+		text = request.values.get('text')
+		image_url = request.values.get('url')
+		background_color = request.values.get("background_color")
+		slideObj = Slide(background_color = background_color, time=time, type="text-and-image", title=title, text=text, image_url = image_url)
+		try:
+			db.session.add(slideObj)
+			db.session.commit()
+			flash("Slide Created")
+		except Exception, e:
+			exc = str(e)
+			flash(exc)
+		return redirect(url_for('dashboard'))
 	return render_template('create_slide_text_and_image.html')
 
 

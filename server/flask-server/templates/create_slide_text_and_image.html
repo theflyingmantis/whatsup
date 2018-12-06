@@ -1,4 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}Text And Image{% endblock %}
 {% block content %}
+<h1>Screenshot here</h1>
+<form method="POST">
+	Title: <input type="text" name="title" placeholder="title" required>
+	Text to be displayed: <input type="text" name="text" placeholder="Enter the text to be shown" maxlength="250" required>
+	Image URL: <input type="url" name="url" placeholder="Enter the url for Background image to be shown" required>
+	Time to be shown (in ms): <input type="number" name="time" placeholder="Display time for slide in milli second" required>
+	Background Color: <input type="color" name="background_color">
+	<input type="submit">
+</form>
 {% endblock %}
