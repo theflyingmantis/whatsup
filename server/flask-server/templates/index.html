@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Whatsup</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fullpage.css')}}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/whats_up.css')}}" />
+		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+	</head>
+	<body>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/fullpage.js')}}"></script>
+		<div id="fullpage">
+			<div class="section" id="main"></div>
+		</div>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/fullpageSettings.js')}}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/whatsupCore.js')}}"></script>
+	</body>
+</html>

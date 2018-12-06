@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Manage Slides{% endblock %}
+{% block content %}
+<h1>Manage Slides</h1>
+<a class="waves-effect waves-light btn" href="/">Home</a>
+<hr>
+<h2>Active Slides</h2>
+	<table>
+	{% for slide in slides %}
+		{% if slide.is_active == True %}
+			<tr>
+				<td>{{slide.text}}</td>
+				<td><a href="delete?id={{slide.id}}">Delete Slide</a></td>
+				<td><a href="inactive?id={{slide.id}}">Make Inactive</a></td>
+			</tr>
+		{% endif %}
+	{% endfor %}
+	</table>
+<hr>
+<h2>InActive Slides</h2>
+	<table>
+	{% for slide in slides %}
+		{% if slide.is_active == False %}
+			<tr>
+				<td>{{slide.text}}</td>
+				<td><a href="delete?id={{slide.id}}">Delete Slide</a></td>
+				<td><a href="active?id={{slide.id}}">Make Slide Active</a></td>
+			</tr>
+		{% endif %}
+	{% endfor %}
+</table>
+{% endblock %}

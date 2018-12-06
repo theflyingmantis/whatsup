@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Only Text{% endblock %}
+{% block content %}
+	<h1>Screenshot here</h1>
+	<form method="POST">
+		Text to be displayed: <input type="text" name="text" placeholder="Enter the text to be shown" maxlength="400" required>
+		Time to be shown (in ms): <input type="number" name="time" placeholder="Display time for slide in milli second" required>
+		Background Color: <input type="color" name="background_color">
+		<input type="submit">
+	</form>
+{% endblock %}

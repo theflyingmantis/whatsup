@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Create Slide{% endblock %}
+{% block content %}
+  <center>
+   <h1>Choose a layout</h1>
+</center>
+<table>
+   
+      <tr>
+         <td> <img src="{{ url_for('static', filename='images/testimage.png') }}" height="100px" width="100px"></td>
+         <td><a waves-effect waves-light btn href="create_slide_only_text">Only Text</a></td>
+      </tr>
+   
+      <tr>
+         <td> <img src="{{ url_for('static', filename='images/testimage.png') }}" height="100px" width="100px"></td>
+         <td><a waves-effect waves-light btn href="create_slide_only_image">Only Image</a></td>
+      </tr>
+   
+      <tr>
+         <td> <img src="{{ url_for('static', filename='images/testimage.png') }}" height="100px" width="100px"></td>
+         <td> <a waves-effect waves-light btn href="create_slide_text_over_image">Text Over Image</a></td>
+      </tr>
+  
+      <tr>
+         <td> <img src="{{ url_for('static', filename='images/testimage.png') }}" height="100px" width="100px"></td>
+         <td> <a waves-effect waves-light btn href="create_slide_text_and_image">Text And Image</a></td>
+      </tr>
+</table>
+ 
+{% endblock %}
