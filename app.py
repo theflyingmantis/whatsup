@@ -134,7 +134,7 @@ def create_slide_only_image():
 			db.session.add(slideObj)
 			db.session.commit()
 			flash("Slide Created")
-		except Exception, e:
+		except Exception as e:
 			exc = str(e)
 			flash(exc)
 		return redirect(url_for('dashboard'))
@@ -152,7 +152,7 @@ def create_slide_text_over_image():
 			db.session.add(slideObj)
 			db.session.commit()
 			flash("Slide Created")
-		except Exception, e:
+		except Exception as e:
 			exc = str(e)
 			flash(exc)
 		return redirect(url_for('dashboard'))
@@ -172,7 +172,7 @@ def create_slide_text_and_image():
 			db.session.add(slideObj)
 			db.session.commit()
 			flash("Slide Created")
-		except Exception, e:
+		except Exception as e:
 			exc = str(e)
 			flash(exc)
 		return redirect(url_for('dashboard'))
