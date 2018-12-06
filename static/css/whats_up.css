@@ -36,16 +36,16 @@
     margin: 50px 50px 50px 50px;
     font-family: 'Slabo 27px', serif;
     font-weight: bold;
-    text-align: justify;
-    text-justify: inter-word;
     text-shadow: 2px 2px black;
 }
 
 .text-and-image img{
+    position: absolute;
     height: auto;
-    max-height: 50%;
-    width: 40%;
+    max-height: 30%;
+    width: 50%;
     right: 0;
+    float: right;
     object-fit: contain;
     margin: 50px 50px 50px 50px;
     display: inline-block;
