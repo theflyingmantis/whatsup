@@ -144,6 +144,10 @@ def create_slide_only_image():
 		return redirect(url_for('dashboard'))
 	return render_template('create_slide_only_image.html')
 
+@app.route('/remove_all', methods=['GET', 'POST'])
+def remove_all():
+	moveAllActiveToInactive()
+
 def moveAllActiveToInactive():
 	slides = Slide.query.filter_by(is_deleted=False, is_active=True).all()
 	for slide in slides:

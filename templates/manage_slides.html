@@ -1,34 +1,49 @@
 {% extends "layout.html" %}
 {% block title %}Manage Slides{% endblock %}
 {% block content %}
-<h1>Manage Slides</h1>
-<a class="waves-effect waves-light btn" href="/dashboard">Home</a>
-<hr>
-<h2>Active Slides</h2>
-	<table>
-	{% for slide in slides %}
-		{% if slide.is_active == True %}
-			<tr>
-				<td>{{slide.title}}</td>
-				<td>{{slide.time}}</td>
-				<td><a href="delete?id={{slide.id}}">Delete Slide</a></td>
-				<td><a href="inactive?id={{slide.id}}">Make Inactive</a></td>
-			</tr>
-		{% endif %}
-	{% endfor %}
-	</table>
-<hr>
-<h2>InActive Slides</h2>
-	<table>
-	{% for slide in slides %}
-		{% if slide.is_active == False %}
-			<tr>
-				<td>{{slide.title}}</td>
-				<td>{{slide.time}}</td>
-				<td><a href="delete?id={{slide.id}}">Delete Slide</a></td>
-				<td><a href="active?id={{slide.id}}">Make Slide Active</a></td>
-			</tr>
-		{% endif %}
-	{% endfor %}
-</table>
+
+<div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-1">
+        <a href="/dashboard" class="brand-logo center white-text">Dashboard</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row" style="margin: 100px auto; width: 60vw;">
+    <div class="col s12">
+      <div class="card white">
+         <div class="card-content grey-text text-darken-3" style="padding: 50px;">
+             <span class="card-title" style="font-size: 70px; margin: 0 0 100px 0;">Manage Slides</span>
+             <h4>Active Slides</h2>
+                        <table>
+                        {% for slide in slides %}
+                            {% if slide.is_active == True %}
+                                <tr>
+                                    <td>{{slide.title}}</td>
+                                    <td>{{slide.time}}</td>
+                                    <td><a href="delete?id={{slide.id}}">Delete Slide</a></td>
+                                    <td><a href="inactive?id={{slide.id}}">Make Inactive</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </table>
+
+                        <h4>InActive Slides</h2>
+                        <table>
+                        {% for slide in slides %}
+                            {% if slide.is_active == False %}
+                                <tr>
+                                    <td>{{slide.title}}</td>
+                                    <td>{{slide.time}}</td>
+                                    <td><a href="delete?id={{slide.id}}">Delete Slide</a></td>
+                                    <td><a href="active?id={{slide.id}}">Make Slide Active</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+            </div>
+         </div>
+      </div>
+   </div>
 {% endblock %}

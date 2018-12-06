@@ -2,10 +2,30 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 
-  <h1>Dashboard</h1>
-  <a class="waves-effect waves-light btn" href="create_slide">Create a slide</a>
-  <a class="waves-effect waves-light btn" href="manage_slides">Manage Slides</a>
-     <a class="waves-effect waves-light btn" href="/display_news/technology">Technology News</a>
-      <a class="waves-effect waves-light btn" href="/display_news/sports">Sports News</a>
-      <a class="waves-effect waves-light btn" href="/display_news/startup">Startup News</a>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-1">
+        <a href="/dashboard" class="brand-logo center white-text">Dashboard</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row" style="margin: 100px auto; width: 80vw;">
+    <div class="col s12">
+      <div class="card white">
+        <div class="card-content grey-text text-darken-3">
+          <span class="card-title" style="font-size: 70px; margin: 20px;">Hey there!</span>
+          <p style="font-size: 30px; margin: 50px 20px 20px 20px;">Where would you like to go?</p>
+        </div>
+        <div class="card-action">
+          <a href="create_slide" style="font-size: 20px; margin: 20px;">Create a slide</a>
+          <a href="manage_slides" style="font-size: 20px; margin: 20px;">Manage Slides</a>
+          <a href="/display_news/technology" style="font-size: 20px; margin: 20px;">Technology News</a>
+          <a href="/display_news/sports" style="font-size: 20px; margin: 20px;">Sports News</a>
+          <a href="/display_news/startup" style="font-size: 20px; margin: 20px;">Startup News</a>
+          <a href="/display_news/science" style="font-size: 20px; margin: 20px;">Science News</a>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

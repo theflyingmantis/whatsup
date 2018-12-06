@@ -13,7 +13,7 @@
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
     <title>{% block title %}{% endblock %}Whatsup</title>
   </head>
-  <body>
+  <body class="grey lighten-4" style="padding: 0 0 100px 0;">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
@@ -24,11 +24,21 @@
       {% endif %}
     {% endwith %}
     <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
-      <br><br>
       {% block footer %}
-      &copy; Copyright 2018 GoHack by <a href="https://abhinavrai.com">Abhinav & Abhishek</a>.
+      <footer class="page-footer blue-grey" style="position: fixed; width: 100%; bottom: 0px;">
+          <div class="container">
+            <div class="row">
+              <div class="col l6">
+                <h5 class="white-text">A part of project WhatsUp!</h5>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container white-text">
+            &copy; Copyright 2018 GoHack by <a class ="white-text" href="https://abhinavrai.com">Abhinav</a> & <a class ="white-text" href="https://iabhishek1041.github.io">Abhishek</a>.
+            </div>
+          </div>
+        </footer>
       {% endblock %}
-    </div>
   </body>
 </html>
