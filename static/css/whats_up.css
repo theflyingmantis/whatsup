@@ -43,10 +43,10 @@
 
 .text-and-image img{
     height: auto;
-    max-height: 500px;
-    width: 800px;
-    float: right;
+    max-height: 50%;
+    width: 40%;
+    right: 0;
+    object-fit: contain;
     margin: 50px 50px 50px 50px;
     display: inline-block;
-    object-fit: contain;
 }

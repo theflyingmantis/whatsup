@@ -1,12 +1,30 @@
 {% extends "layout.html" %}
 {% block title %}Only Text{% endblock %}
 {% block content %}
-	<h1>Screenshot here</h1>
-	<form method="POST">
-		Title: <input type="text" name="title" placeholder="title" required>
-		Text to be displayed: <input type="text" name="text" placeholder="Enter the text to be shown" maxlength="400" required>
-		Time to be shown (in ms): <input type="number" name="time" placeholder="Display time for slide in milli second" required>
-		Background Color: <input type="color" name="background_color">
-		<input type="submit">
-	</form>
+<div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-1">
+        <a href="/dashboard" class="brand-logo center white-text">Dashboard</a>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="row" style="margin: 100px auto; width: 60vw;">
+    <div class="col s12">
+      <div class="card white">
+         <div class="card-content grey-text text-darken-3"> 
+        	<form method="POST">
+        		Title: <input type="text" name="title" placeholder="title" required>
+        		Text to be displayed: <input type="text" name="text" placeholder="Enter the text to be shown" maxlength="400" required>
+        		Time to be shown (in ms): <input type="number" name="time" placeholder="Display time for slide in milli second" required>
+        		Background Color: <input type="color" name="background_color">
+            <br>
+            <br>
+        		<input class="waves-effect waves-light btn yellow darken-2" type="submit" style="color: white;">
+        	</form>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
