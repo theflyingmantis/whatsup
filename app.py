@@ -149,6 +149,25 @@ def remove_all():
 	moveAllActiveToInactive()
 	return redirect(url_for('dashboard'))
 
+@app.route('/ci_build_fail', methods = ['POST'])
+def cifail():
+	if request.method == "POST":
+		moveAllActiveToInactive()
+		service = request.values.get('service')
+		logs = request.values.get('logs')
+		time = 20000
+		title = "cifail-"+str(service)
+		image_url = "https://media0.giphy.com/media/5yfle3Ii3jrrO/giphy.gif"
+		text = str(service)+" - "+str(logs)
+		slideObj = Slide(background_color = background_color_scheme[1], time=time, type="text-and-image", title=title, text=text, image_url=image_url, is_active=True)
+		try:
+			db.session.add(slideObj)
+			db.session.commit()
+		except Exception as e:
+			exc = str(e)
+			flash(exc)
+	return redirect(url_for('dashboard'))
+
 
 def moveAllActiveToInactive():
 	slides = Slide.query.filter_by(is_deleted=False, is_active=True).all()
