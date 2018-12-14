@@ -122,7 +122,8 @@ def tv_manage():
 	if not isLoggedIn():
 		flash("PLease Login First")
 		return redirect(url_for('tv'))
-	slides = TVSlide.query.filter_by(is_deleted=False).all()
+	tv_id = int(session.get('logged_in'))
+	slides = TVSlide.query.filter_by(is_deleted=False, tv_id=tv_id).all()
 	return render_template('manage_slides.html', slides = slides)
 
 
