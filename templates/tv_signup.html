@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}GoTV Signup{% endblock %}
+{% block content %}
+<center><h1>Go-TV User Signup</h1></center>
+
+<form method="POST">
+	Name: <input type="text" name="tvname" required>
+	Password: <input type="Password" name="password" required>
+	<input type="submit" name="Create TV">
+</form>
+{% endblock %}

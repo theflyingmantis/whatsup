@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Create Slide{% endblock %}
+{% block content %}
+
+<div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-1">
+        <a href="/dashboard" class="brand-logo center white-text">Dashboard</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row" style="margin: 100px auto; width: 60vw;">
+    <div class="col s12">
+      <div class="card white">
+         <div class="card-content grey-text text-darken-3">
+             <span class="card-title" style="font-size: 70px; margin: 20px;">Choose a layout</span>
+               <table cellspacing="0" cellpadding="0" style="margin: 40px 20px; border: none;">
+                <tr style="border: none;">
+                     <td><a href="/tv/create_slide?type=url"><img src="{{ url_for('static', filename='images/datadog.png') }}" style="height: 200px; object-fit: contain;"></a></td>
+                     <td><a href="/tv/create_slide?type=url" style="font-size: 30px;" class="black-text">URL</a></td>
+                  </tr>
+                  <tr style="border: none;">
+                     <td><a href="/tv/create_slide?type=only_text"><img src="{{ url_for('static', filename='images/just-text.png') }}" style="height: 200px; object-fit: contain;"></a></td>
+                     <td><a href="/tv/create_slide?type=only_text" style="font-size: 30px;" class="black-text">Just Text</a></td>
+                  </tr>
+
+                  <tr style="margin: 40px 20px; border: none;">
+                     <td><a href="/tv/create_slide?type=only_image"><img src="{{ url_for('static', filename='images/just-image.png') }}" style="height: 200px; object-fit: contain;"></a></td>
+                     <td><a waves-effect waves-light btn href="/tv/create_slide?type=only_image" style="font-size: 30px;" class="black-text">Just Image</a></td>
+                  </tr>
+               
+                  <tr style="margin: 40px 20px; border: none;">
+                     <td><a href="/tv/create_slide?type=text_over_image"><img src="{{ url_for('static', filename='images/text-with-background-image.png') }}" style="height: 200px; object-fit: contain;"></a></td>
+                     <td><a waves-effect waves-light btn href="/tv/create_slide?type=text_over_image" style="font-size: 30px;" class="black-text">Text and background</a></td>
+                  </tr>
+              
+                  <tr style="margin: 40px 20px; border: none;">
+                     <td><a href="/tv/create_slide?type=text_and_image"><img src="{{ url_for('static', filename='images/text-and-image.png') }}" style="height: 200px; object-fit: contain;"></a></td>
+                     <td> <a waves-effect waves-light btn href="/tv/create_slide?type=text_and_image" style="font-size: 30px;" class="black-text">Text And Image</a></td>
+                  </tr>
+            </table>
+            </div>
+         </div>
+      </div>
+   </div>
+ 
+{% endblock %}
